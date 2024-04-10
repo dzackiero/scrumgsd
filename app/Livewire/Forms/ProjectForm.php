@@ -9,11 +9,11 @@ use Livewire\Form;
 class ProjectForm extends Form
 {
     #[Validate(['required', 'string'], ["name" => "Project Name"])]
-    public string $name = 'Test';
+    public string $name = '';
     #[Validate(['required', 'date_format:Y'], ["year" => "Project Year"])]
-    public ?string $year = "2024";
+    public ?string $year = "";
     #[Validate(['required', 'numeric'], ["teamCount" => "Team Size"])]
-    public ?int $teamCount = 2;
+    public ?int $teamCount = null;
 
     public $id;
 

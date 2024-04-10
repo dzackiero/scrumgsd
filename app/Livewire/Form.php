@@ -108,6 +108,8 @@ class Form extends Component
                 ]);
             }
             \DB::commit();
+
+            $this->redirectRoute("results.detail", ["result" => $result->id]);
         } catch (\Exception $e) {
             \DB::rollBack();
             dd($e);
