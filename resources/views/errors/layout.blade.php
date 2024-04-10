@@ -5,16 +5,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ isset($title) ? "$title - Scrum GSD" : "Scrum GSD" }}</title>
+    <title>@yield("title") - Scrum GSD</title>
 
     <link rel="icon" type="image/png" href="{{asset("images/icon.png")}}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     @vite('resources/css/app.css')
+    @livewireStyles
 </head>
 <body>
 <x-navigation-bar/>
-<div class="w-screen min-h-svh bg-gradient-to-r from-primary-900 to-secondary-500">
+<div class="w-screen min-h-svh grid place-items-center bg-gradient-to-r from-primary-900 to-secondary-500">
     <svg class="absolute top-0 left-0 w-96 h-80 md:w-[604px] md:h-[504px]"
          viewBox="0 0 687 505" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g opacity="0.2">
@@ -102,11 +103,18 @@
             <path d="M474.974 17.4744L410.068 -75.9174" stroke="white"/>
         </g>
     </svg>
-
-    <div class="pt-36">
-        {{ $slot }}
-    </div>
+    <x-card>
+        <div class="flex flex-col gap-6 items-center">
+            <h1 class="text-5xl font-semibold text-center text-white">
+                @yield("code") @yield("message")
+            </h1>
+            <a href="{{ route("home") }}">
+                <x-button label="Kembali"/>
+            </a>
+        </div>
+    </x-card>
 </div>
 <x-copyright/>
+@livewireScripts
 </body>
 </html>
