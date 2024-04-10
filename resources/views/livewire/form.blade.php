@@ -75,7 +75,8 @@
                     <div class="hidden sm:flex justify-between w-full">
                         <x-button outline hide-spinner label="Sebelumnya"
                                   wire:click="changeQuestion({{$current - 1}})"/>
-                        <x-button label="Selanjutnya" wire:click="changeQuestion({{$current + 1}})"/>
+                        <x-button label="{{ ($questions->last()->order == $current ? 'Selesai' : 'Selanjutnya') }}"
+                                  wire:click="changeQuestion({{$current + 1}})"/>
                     </div>
                     <div class="flex sm:hidden justify-between w-full">
                         <x-icon-button wire:click="changeQuestion({{ $current - 1 }})">
@@ -93,7 +94,6 @@
                     </div>
                 </div>
             </x-card>
-
         @endif
     </div>
 

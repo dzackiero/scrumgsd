@@ -15,7 +15,7 @@ use Livewire\Component;
 class Form extends Component
 {
     // First Screen/Form displayed
-    public int $step = Step::Project->value;
+    public int $step = Step::Quiz->value;
 
     // Forms
     public ProjectForm $projectForm;
@@ -62,7 +62,7 @@ class Form extends Component
             return;
         }
         if ($this->step == Step::Personal->value) {
-            $this->projectForm->validate();
+            $this->personalForm->validate();
             return;
         }
         if ($this->step == Step::Quiz->value) {
