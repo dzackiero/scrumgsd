@@ -1,4 +1,6 @@
-<svg width="180" viewBox="0 0 260 54" fill="none" xmlns="http://www.w3.org/2000/svg"
+@props(["width" => 180])
+
+<svg width="{{ $width }}" viewBox="0 0 260 54" fill="none" xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect width="260" height="54" fill="url(#pattern0_40_5378)"/>
     <defs>

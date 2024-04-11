@@ -15,7 +15,7 @@ use Livewire\Component;
 class Form extends Component
 {
     // First Screen/Form displayed
-    public int $step = Step::Quiz->value;
+    public int $step = Step::Project->value;
 
     // Forms
     public ProjectForm $projectForm;
