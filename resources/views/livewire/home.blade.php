@@ -7,7 +7,7 @@
         <h3 class="text-3xl font-semibold text-center">Global Software Development</h3>
         <h5 class="text-2xl text-center">Kolaborasi pembuatan software secara global</h5>
 
-        <a href="{{ route("form") }}" wire:navigate>
+        <a href="{{ route("form") }}" wire:navigate class="z-10">
             <x-button label="Lakukan Penilaian Scrum-GSD"/>
         </a>
         <div
@@ -240,7 +240,7 @@
                 <h5 class="text-2xl max-w-[48rem]">
                     Assesmen kompetensi Scrum GSD dilakukan untuk mengukur tingkat kematangan kompetensi penerapan Scrum
                 </h5>
-                <a href="{{ route("form") }}" wire:navigate>
+                <a href="{{ route("form") }}" wire:navigate class="z-10">
                     <x-button label="Lakukan Penilaian Scrum-GSD"/>
                 </a>
             </div>
