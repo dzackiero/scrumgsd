@@ -4,7 +4,7 @@
         <x-card width="max-w-6xl">
 
 
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto shadow-md rounded-lg sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                     <thead class="text-sm text-gray-700 bg-gray-50">
                     <tr>
