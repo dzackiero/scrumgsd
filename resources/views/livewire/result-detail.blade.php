@@ -1,5 +1,5 @@
 <main class="w-screen flex py-16">
-    <div class="flex flex-col gap-16 px-12 w-full items-center">
+    <div class="flex flex-col gap-16  px-4 md:px-12 w-full items-center">
         <h1 class="text-5xl font-semibold text-center text-white">Hasil Penilaian</h1>
         <x-card width="max-w-6xl">
             <div class="flex flex-col items-start gap-6">
