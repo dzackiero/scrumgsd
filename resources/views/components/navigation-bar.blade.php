@@ -12,7 +12,7 @@
         <a href="{{ route("home") }}">
             <x-logo/>
         </a>
-        <ul class="hidden md:flex gap-8">
+        <ul class="hidden lg:flex gap-8">
             @foreach($routes as $title => $route)
                 <li><a wire:navigate href="{{ route($route) }}"
                        class="{{ request()->routeIs($route) ? "border-b-4" : "hover:border-b-4" }} font-bold text-blue-800 border-b-yellow-500 px-2">{{ $title }}</a>
@@ -28,7 +28,7 @@
                 </li>
             @endif
         </ul>
-        <button class="block md:hidden" @click="slideOverOpen=true">
+        <button class="block lg:hidden" @click="slideOverOpen=true">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
