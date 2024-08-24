@@ -24,7 +24,7 @@
                        class="{{ request()->routeIs("results") || request()->routeIs("results.detail") ? "border-b-4" : "hover:border-b-4" }} font-bold text-blue-800 border-b-yellow-500 px-2">{{ "Laporan Penilaian" }}</a>
                 </li>
                 <li><a wire:navigate href="{{ route("logout") }}"
-                       class="{{ false ? "border-b-4" : "hover:border-b-4" }} font-bold text-blue-800 border-b-yellow-500 px-2">{{ "Halo, " . auth()->user()->name }}</a>
+                       class="{{ false ? "border-b-4" : "hover:border-b-4" }} font-bold text-blue-800 border-b-yellow-500 px-2">Logout</a>
                 </li>
             @endif
         </ul>

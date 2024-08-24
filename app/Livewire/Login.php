@@ -15,14 +15,13 @@ class Login extends Component
     #[Validate(["required", "min:6"])]
     public string $password = "";
 
-
-    public function login()
+    public function login(): void
     {
         $credential = $this->validate();
         if (auth()->attempt($credential)) {
             $this->redirectRoute("form");
         } else {
-            dd("wrong password");
+            $this->addError("attempt", "Wrong Email or Password, Please try again.");
         }
     }
 

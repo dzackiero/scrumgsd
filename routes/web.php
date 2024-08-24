@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,18 +11,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/email", function () {
-    $recipientEmail = 'dzakynashshar@gmail.com';
-    Mail::to($recipientEmail)->send(new \App\Mail\VerificationMail());
-
-    return response()->json(['message' => 'Email sent successfully']);
-});
-
-
+//Route::get("/email", function () {
+//    $recipientEmail = 'dzakynashshar@gmail.com';
+//    Mail::to($recipientEmail)->send(new \App\Mail\VerificationMail());
+//    return response()->json(['message' => 'Email sent successfully']);
+//});
 Route::get("/", \App\Livewire\Home::class)->name("home");
 Route::get("/login", \App\Livewire\Login::class)->name("login");
 Route::get("/logout", [\App\Http\Controllers\AuthController::class, "logout"])->name("logout");
 Route::get("/register", \App\Livewire\Register::class)->name("register");
+
+Route::get('/forgot-password', \App\Livewire\ForgotPassword::class)
+    ->middleware('guest')->name('password.request');
+
+Route::get('/reset-password/{token}', \App\Livewire\ResetPassword::class)
+    ->middleware('guest')->name('password.reset');
 
 
 Route::group(["middleware" => "auth"], function () {
