@@ -64,12 +64,14 @@
                         <option value="Scrum Master">Scrum Master</option>
                         <option value="Product Owner">Product Owner</option>
                     </x-inputs.select>
-                    <div class="flex justify-end w-full">
+                    <div class="flex justify-between flex-row-reverse w-full">
                         @if($personalForm->position == "Scrum Master" || $personalForm->position == "Product Owner")
                             <x-alert-button label="Selanjutnya" disabled/>
                         @else
                             <x-button label="Selanjutnya" wire:click=" changeStep({{ \App\Enums\Step::Quiz->value }})"/>
                         @endif
+                        <x-button label="Kembali"
+                                  wire:click=" changeStep({{ \App\Enums\Step::Project->value }}, false)"/>
                     </div>
                 </div>
             </x-card>

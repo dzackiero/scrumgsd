@@ -74,12 +74,11 @@ class Form extends Component
 
     public function existingProject(): void
     {
-        if ($this->selectedProject == '') {
-            $this->addError("seletedProject", "Perlu memilih salah satu proyek");
-        } else {
-            $this->useExistingProject = true;
-            $this->step = Step::Personal->value;
-        }
+        $this->validateOnly('selectedProject',
+            ['selectedProject' => ['required']],
+            ['selectedProject.required' => 'Proyek harus dipilih terlebih dahulu']);
+        $this->useExistingProject = true;
+        $this->step = Step::Personal->value;
     }
 
     public function validateStep(): void
