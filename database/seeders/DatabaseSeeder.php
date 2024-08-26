@@ -13,13 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            "name" => "Dzaky",
-            "email" => "dzakynashshar@gmail.com",
-            "password" => "password123",
-            "email_verified_at" => now(),
-        ]);
-
-        $this->call([QuestionSeeder::class, ProjectSeeder::class]);
+        if (app()->environment() == 'production') {
+            $this->call([QuestionSeeder::class]);
+        } else {
+            User::create([
+                "name" => "Dzaky",
+                "email" => "dzakynashshar@gmail.com",
+                "password" => "password123",
+                "email_verified_at" => now(),
+            ]);
+            $this->call([QuestionSeeder::class, ProjectSeeder::class]);
+        }
     }
 }
