@@ -3,7 +3,7 @@
 <div class="flex flex-col gap-1 w-full">
     <label class="text-primary-900 font-semibold text-lg">{{$label}}</label>
     <input
-        {{$attributes->except(["class"])}} class="rounded-full py-2 border-gray-400
+        {{$attributes->except(["class"])}} class="rounded-full py-2 border-gray-400 disabled:bg-gray-200 disabled:cursor-no-drop
         @error($attributes["wire:model"] ?? false)
          !border-2 !border-red-500 @enderror"/>
     <span

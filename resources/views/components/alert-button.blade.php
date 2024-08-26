@@ -1,7 +1,7 @@
 @props(["label" => "", "outline" => false, "hideSpinner" => false, "prefixIcon" => false, "suffixIcon" => false])
 
 @php
-    $buttonClasses = "rounded-full " . ($prefixIcon || $suffixIcon ? "px-4 " : "px-8 ") . "py-2 text-white text-lg disabled:cursor-not-allowed transition bg ease-linear";
+    $buttonClasses = "rounded-full " . ($prefixIcon || $suffixIcon ? "px-4 " : "px-8 ") . "py-2 text-white text-lg disabled:cursor-not-allowed transition ease-linear";
     $loadingClasses = "inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white";
 @endphp
 
@@ -9,9 +9,9 @@
         {{$attributes->except("class")}}
         class="
         @if($outline)
-            {{$buttonClasses}} text-primary-900 hover:text-white hover:bg-gradient-to-r hover:from-primary-950 hover:to-secondary-600 disabled:bg-red-500
+            {{$buttonClasses}} text-primary-900 hover:text-white hover:bg-gradient-to-r
         @else
-            {{$buttonClasses}} bg-gradient-to-r from-primary-900 to-secondary-500 hover:bg-gradient-to-r hover:from-primary-950 hover:to-secondary-600
+            {{$buttonClasses}} bg-red-600 disabled:bg-gray-400
         @endif
         ">
     <div class="flex items-center gap-2">

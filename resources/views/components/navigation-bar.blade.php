@@ -23,6 +23,9 @@
                 <li><a wire:navigate href="{{ route("results") }}"
                        class="{{ request()->routeIs("results") || request()->routeIs("results.detail") ? "border-b-4" : "hover:border-b-4" }} font-bold text-blue-800 border-b-yellow-500 px-2">{{ "Laporan Penilaian" }}</a>
                 </li>
+                <li><a wire:navigate href="{{ route("projects") }}"
+                       class="{{ request()->routeIs("projects") || request()->routeIs("projects.detail") ? "border-b-4" : "hover:border-b-4" }} font-bold text-blue-800 border-b-yellow-500 px-2">{{ "Proyek Saya" }}</a>
+                </li>
                 <li><a wire:navigate href="{{ route("logout") }}"
                        class="{{ false ? "border-b-4" : "hover:border-b-4" }} font-bold text-blue-800 border-b-yellow-500 px-2">Logout</a>
                 </li>

@@ -42,6 +42,7 @@ class ProjectForm extends Form
             $project->refresh();
         } else {
             $project = Project::create($data);
+            $project->refresh();
         }
 
         return $project;

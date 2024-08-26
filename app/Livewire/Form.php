@@ -7,6 +7,7 @@ use App\Livewire\Forms\PersonalForm;
 use App\Livewire\Forms\ProjectForm;
 use App\Models\Answer;
 use App\Models\Option;
+use App\Models\Project;
 use App\Models\Question;
 use App\Models\Result;
 use Illuminate\Support\Collection;
@@ -15,11 +16,20 @@ use Livewire\Component;
 class Form extends Component
 {
     // First Screen/Form displayed
-    public int $step = Step::Project->value;
+    public int $step = Step::Personal->value;
+
 
     // Forms
     public ProjectForm $projectForm;
     public PersonalForm $personalForm;
+
+    public bool $useExistingProject = false;
+    public $selectedProject = '';
+    public ?array $project;
+
+    // Project
+
+    public ?Collection $projects;
 
     // Quiz
     public int $current = 1;
@@ -28,10 +38,7 @@ class Form extends Component
 
     public function mount(): void
     {
-        if ($project = auth()->user()->project) {
-            $this->projectForm->setData($project);
-        }
-
+        $this->projects = Project::whereUserId(auth()->id())->get()->keyBy('id');
         $this->questions = Question::with("options")->get()->keyBy("order");
         $this->options = Option::all()->keyBy("id")->map(fn($option) => [
             "question_id" => $option->question_id,
@@ -40,6 +47,16 @@ class Form extends Component
             "value" => $option->value,
             "state" => false,
         ]);
+    }
+
+    public function updated($property): void
+    {
+        if ($property === 'selectedProject') {
+            $project = Project::find($this->selectedProject);
+            if ($project) {
+                $this->project = $project->toArray();
+            }
+        }
     }
 
     public function render()
@@ -53,6 +70,12 @@ class Form extends Component
             $this->validateStep();
         }
         $this->step = $step;
+    }
+
+    public function existingProject(): void
+    {
+        $this->useExistingProject = true;
+        $this->step = Step::Personal->value;
     }
 
     public function validateStep(): void
@@ -91,13 +114,18 @@ class Form extends Component
         try {
             \DB::beginTransaction();
 
-            $this->projectForm->createOrUpdate();
+            if ($this->useExistingProject) {
+                $project = Project::find($this->selectedProject);
+            } else {
+                $project = $this->projectForm->createOrUpdate();
+            }
 
             $result = Result::create([
                 "user_id" => auth()->user()->id,
                 "name" => $personal["name"],
                 "position" => $personal["position"],
                 "score" => $score,
+                "project_id" => $project->id
             ]);
 
             $filteredOptions = $this->options->filter(fn($opt) => $opt["state"]);
@@ -112,7 +140,6 @@ class Form extends Component
             $this->redirectRoute("results.detail", ["result" => $result->id]);
         } catch (\Exception $e) {
             \DB::rollBack();
-            dd($e);
         }
     }
 
@@ -120,6 +147,4 @@ class Form extends Component
     {
         return $this->options->filter(fn($opt) => $opt["state"])->pluck("value")->sum() ?? 0;
     }
-
-
 }

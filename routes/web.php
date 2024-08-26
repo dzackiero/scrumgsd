@@ -11,11 +11,6 @@
 |
 */
 
-//Route::get("/email", function () {
-//    $recipientEmail = 'dzakynashshar@gmail.com';
-//    Mail::to($recipientEmail)->send(new \App\Mail\VerificationMail());
-//    return response()->json(['message' => 'Email sent successfully']);
-//});
 Route::get("/", \App\Livewire\Home::class)->name("home");
 Route::get("/login", \App\Livewire\Login::class)->name("login");
 Route::get("/logout", [\App\Http\Controllers\AuthController::class, "logout"])->name("logout");
@@ -37,6 +32,10 @@ Route::group(["middleware" => "auth"], function () {
 });
 Route::group(["middleware" => ["auth", "verified"]], function () {
     Route::get("/form", \App\Livewire\Form::class)->name("form");
+
     Route::get("/results", \App\Livewire\ResultList::class)->name("results");
     Route::get("/results/{result}", \App\Livewire\ResultDetail::class)->name("results.detail");
+
+    Route::get("/projects", \App\Livewire\ProjectList::class)->name("projects");
+    Route::get("/projects/{project}", \App\Livewire\ProjectDetail::class)->name("projects.detail");
 });

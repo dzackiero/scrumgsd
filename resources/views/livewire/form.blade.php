@@ -1,23 +1,56 @@
 <main class="w-screen flex py-16">
     <div class="flex flex-col gap-16 px-4 md:px-12 w-full items-center">
         <h1 class="text-5xl font-semibold text-center text-white">Instrumen Penilaian Scrum</h1>
-        @if($step == \App\Enums\Step::Project->value)
-            <x-card>
-                <div class="flex flex-col items-start gap-6">
-                    <h3 class="text-2xl text-primary-900 font-bold text-center border-b-4 border-b-yellow-500 px-4">
-                        Data Proyek
-                    </h3>
-                    <x-input wire:model="projectForm.name" label="Nama Proyek" placeholder="Nama Proyek"/>
-                    <x-input wire:model="projectForm.year" label="Tahun" placeholder="Tahun"/>
-                    <x-input wire:model="projectForm.teamCount" label="Jumlah Tim" placeholder="Jumlah Tim"/>
-                    <div class="flex justify-end w-full">
-                        <x-button label="Selanjutnya"
-                                  wire:click="changeStep({{ \App\Enums\Step::Personal->value }})"/>
-                    </div>
-                </div>
-            </x-card>
-        @endif
+        @if($step === \App\Enums\Step::Project->value)
+            <x-tabs>
+                <x-slot:buttons>
+                    <x-tabs.button label="Proyek Baru"/>
+                    <x-tabs.button label="Proyek Lama"/>
+                </x-slot:buttons>
+                <x-slot:contents>
+                    <x-tabs.content>
+                        <x-card>
+                            <div class="flex flex-col items-start gap-6">
+                                <h3 class="text-2xl text-primary-900 font-bold text-center border-b-4 border-b-yellow-500 px-4">
+                                    Data Proyek
+                                </h3>
+                                <x-input wire:model="projectForm.name" label="Nama Proyek" placeholder="Nama Proyek"/>
+                                <x-input wire:model="projectForm.year" label="Tahun" placeholder="Tahun"/>
+                                <x-input wire:model="projectForm.teamCount" label="Jumlah Tim"
+                                         placeholder="Jumlah Tim"/>
+                                <div class="flex justify-end w-full">
+                                    <x-button label="Selanjutnya"
+                                              wire:click="changeStep({{ \App\Enums\Step::Personal->value }})"/>
+                                </div>
+                            </div>
+                        </x-card>
+                    </x-tabs.content>
 
+                    <x-tabs.content>
+                        <x-card>
+                            <div class="flex flex-col items-start gap-6">
+                                <h3 class="text-2xl text-primary-900 font-bold text-center border-b-4 border-b-yellow-500 px-4">
+                                    Data Proyek
+                                </h3>
+                                <x-inputs.select label="Proyek" wire:model.change="selectedProject">
+                                    <option value="" disabled>Pilih Proyek</option>
+                                    @foreach($projects as $pr)
+                                        <option value="{{ $pr->id }}">{{ $pr->name }}</option>
+                                    @endforeach
+                                </x-inputs.select>
+                                <x-input wire:model="project.year" label="Tahun" placeholder="Tahun" disabled/>
+                                <x-input wire:model="project.team_count" label="Jumlah Tim"
+                                         placeholder="Jumlah Tim" disabled/>
+                                <div class="flex justify-end w-full">
+                                    <x-button label="Selanjutnya"
+                                              wire:click="existingProject({{ \App\Enums\Step::Personal->value }})"/>
+                                </div>
+                            </div>
+                        </x-card>
+                    </x-tabs.content>
+                </x-slot:contents>
+            </x-tabs>
+        @endif
         @if($step == \App\Enums\Step::Personal->value)
             <x-card>
                 <div class="flex flex-col items-start gap-6">
@@ -25,15 +58,18 @@
                         Data Pribadi
                     </h3>
                     <x-input label="Nama" placeholder="Nama Lengkap" wire:model="personalForm.name"/>
-                    <x-inputs.select label="Posisi" wire:model="personalForm.position">
+                    <x-inputs.select label="Posisi" wire:model.change="personalForm.position">
                         <option value="" disabled>Pilih Posisi</option>
                         <option value="Scrum Developer">Scrum Developer</option>
                         <option value="Scrum Master">Scrum Master</option>
                         <option value="Product Owner">Product Owner</option>
                     </x-inputs.select>
                     <div class="flex justify-end w-full">
-                        <x-button label="Selanjutnya"
-                                  wire:click="changeStep({{ \App\Enums\Step::Quiz->value }})"/>
+                        @if($personalForm->position == "Scrum Master" || $personalForm->position == "Product Owner")
+                            <x-alert-button label="Selanjutnya" disabled/>
+                        @else
+                            <x-button label="Selanjutnya" wire:click=" changeStep({{ \App\Enums\Step::Quiz->value }})"/>
+                        @endif
                     </div>
                 </div>
             </x-card>

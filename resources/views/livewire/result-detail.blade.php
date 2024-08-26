@@ -1,6 +1,9 @@
 <main class="w-screen flex py-16">
     <div class="flex flex-col gap-16  px-4 md:px-12 w-full items-center">
-        <h1 class="text-5xl font-semibold text-center text-white">Hasil Penilaian</h1>
+        <div>
+            <h1 class="text-5xl font-semibold text-center text-white">Hasil Penilaian</h1>
+            <h1 class="text-2xl font-semibold text-center text-white">Proyek: {{ $result->project->name }}</h1>
+        </div>
         <x-card width="max-w-6xl">
             <div class="flex flex-col items-start gap-6">
                 <div class="w-full flex flex-col sm:flex-row gap-6 justify-between">
@@ -9,7 +12,6 @@
                         <h4 class="text-2xl text-primary-900">{{ $result->position }}</h4>
                     </div>
                     <div class="flex flex-col gap-4 items-center">
-                        {{--                        <h5 class="text-primary-900 font-bold text-2xl border-b-4 border-b-yellow-500">Skor</h5>--}}
                         <div
                             class="bg-white bg-opacity-50 rounded-full border border-yellow-500 w-32 h-32 grid place-items-center">
                             <div class="flex flex-col items-center">

@@ -9,7 +9,6 @@
 
     <link rel="icon" type="image/png" href="{{asset("images/icon.png")}}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
     @vite('resources/css/app.css')
 </head>
 <body>

@@ -11,7 +11,9 @@ class ResultList extends Component
 
     public function mount()
     {
-        $this->results = Result::where("user_id", auth()->user()->id)->get();
+        $this->results = Result::with("project")
+            ->where("user_id", auth()->id())
+            ->get();
     }
 
     public function render()

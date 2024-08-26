@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained();
+            $table->foreignId("project_id")->constrained()->cascadeOnDelete();
             $table->string("name");
             $table->string("position");
             $table->float("score");
